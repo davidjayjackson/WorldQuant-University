@@ -1,0 +1,125 @@
+## Analysis of Mexico Housing Prices
+#### Commands Used:
+* df.from_csv() (create a data frame from csv file
+* df.to_csv()   ( write data data to csv file)
+* df.concat()   combine dart frame into single data frames (axis = 0 is for columns
+df.str.split()
+df.replace()
+* df.to_csv("data/clean-mexico-real-estate.csv",index = False)
+* df3.dropna(inplace = True)
+* df = pd.concat([df1,df3,df3])  combine dart frame into single data frames (axis = 0 is for columns
+* df1['price_usd'] = df1['price_usd'].str.replace("$","",regex=False).str.replace(",","",regex=False)
+* df2['price_usd'] = (df2['price_mxn']/19).round(2)
+* df2.drop(columns=['price_mxn'],inplace = True)
+* df3[["lat","lon"]] = df3["lat-lon"].str.split(",",expand = True)
+###
+#### Plot houses location
+```
+fig = px.scatter_mapbox(
+    df,  # Our DataFrame
+    lat=...,
+    lon=...,
+    center={"lat": 19.43, "lon": -99.13},  # Map will be centered on Mexico City
+    width=600,  # Width of map
+    height=600,  # Height of map
+    hover_data=["price_usd"],  # Display price when hovering mouse over house
+)
+
+fig.update_layout(mapbox_style="open-street-map")
+
+fig.show()
+```
+### 1.3.3 Categorical Variables: State
+```
+df['state'].nunique() # returns count
+df['state'].unique() # returns unique list of states
+df['state'].value_counts().head()
+
+### 1.3.4 Numerical Data: "area_m2" and "price_usd"
+df[['area_m2','price_usd']].describe()
+
+### 1.3.5: Histograms and boxplots (area_m2)
+#### 1.3.6
+plt.hist(x='area_m2',data = df)
+plt.xlabel("Area [sq meters]")
+plt.ylabel("Frequency")
+plt.title("Distribution of Home Sizes");
+
+plt.boxplot(x='area_m2',data = df,vert = False)
+plt.xlabel("Area [sq meters]")
+plt.title("Distribution of Home Sizes")
+
+### 1.3.7  Hisogram and boxplot (price_usd and price_m2)
+
+plt.hist(x='price_usd',data = df)
+plt.xlabel("Price [USD]")
+plt.ylabel("Frequency")
+plt.title("Distribution of Home Prices");
+
+### 1.3.8
+plt.boxplot(x='price_usd',data = df,vert = False)
+plt.xlabel("Price [USD]")
+plt.title("Distribution of Home Prices")
+
+### 1.4.0 Location or Size: What Influences House Prices in Mexico?
+#### 1.4.2 Calculate mean price by state
+mean_price_by_state = df.groupby("state")["price_usd"].mean().sort_values(ascending = False)
+
+#### 1.4.3 Bar plot by mean price by state
+mean_price_by_state.plot(kind='barh',
+            xlabel = "State",
+            ylabel = "Mean Price [USD]",
+            title = "Mean House Price by State");
+            
+#### 1.4.4 Price per square meter.
+df["price_per_m2"] = df["price_usd"]/ df["area_m2"]
+
+#### 1.4.5 Mean Price per M^2[USD]
+(
+    df.groupby("state")
+    ["price_per_m2"].mean()
+    .sort_values(ascending = False)
+    .plot(
+        kind = 'barh',
+        ylabel = "State",
+        xlabel = "Mean Price per M^2[USD]",
+        title = "Mean House Price per M^2 by State"
+    )
+    );
+	
+#### 1.4.6  Is there a relationship between home size and price?
+  
+plt.scatter(x="area_m2",y="price_usd",data = df)
+plt.xlabel("Area [sq meters]")
+plt.ylabel("Price (USD]")
+plt.title("Price vs Area")
+
+plt.scatter(x="area_m2",y="price_per_m2",data = df)
+plt.xlabel("Area [sq meters]")
+plt.ylabel("Price per meter sq (USD]")
+plt.title("Price per meter  vs Area")
+
+#### 1.4.7 Using the corr method, calculate the Pearson correlation coefficient
+for "area_m2" and "price_usd"
+
+p_correlation = df["area_m2"].corr(df["price_usd"])
+print(p_correlation)
+
+p_correlation = df["area_m2"].corr(df["price_per_m2"])
+print(p_correlation)
+
+#### 1.4.8  State of Morelos
+
+df_morelos = df[df["state"] =="Morelos" ]
+
+#### 1.4.9 Morelos correlation
+
+plt.scatter(x="area_m2",y="price_usd",data = df_morelos)
+plt.xlabel("Area [sq meters]")
+plt.ylabel("Price per meter sq (USD]")
+plt.title("Morelos: Price vs. Area")
+
+#### 1.5.0 
+
+
+```
