@@ -13,6 +13,11 @@ df.replace()
 * df2.drop(columns=['price_mxn'],inplace = True)
 * df3[["lat","lon"]] = df3["lat-lon"].str.split(",",expand = True)
 
+#### Library that need to be loaded
+import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.express as px
+
 ---------------------------------------------------------------------------
 ### Answers: https://chat.openai.com/
 
