@@ -1,5 +1,6 @@
 ## Analysis of Mexico Housing Prices
 #### Commands Used:
+```
 * df.from_csv() (create a data frame from csv file
 * df.to_csv()   ( write data data to csv file)
 * df.concat()   combine dart frame into single data frames (axis = 0 is for columns
