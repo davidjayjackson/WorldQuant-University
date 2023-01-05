@@ -12,7 +12,14 @@ df.replace()
 * df2['price_usd'] = (df2['price_mxn']/19).round(2)
 * df2.drop(columns=['price_mxn'],inplace = True)
 * df3[["lat","lon"]] = df3["lat-lon"].str.split(",",expand = True)
-###
+
+---------------------------------------------------------------------------
+### Answers: https://chat.openai.com/
+
+# Replace all the letters in the 'column' with a space
+df['column'] = df['column'].replace(r'[a-zA-Z]', ' ', regex=True)
+
+-----------------------------------------------------------------------------
 #### Plot houses location
 ```
 fig = px.scatter_mapbox(
