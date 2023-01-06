@@ -26,6 +26,12 @@ import plotly.express as px
 df['column'] = df['column'].replace(r'[a-zA-Z]', ' ', regex=True)
 
 -----------------------------------------------------------------------------
+#### Sort values column in bar plot:https://chat.openai.com/
+houses['property_type'].value_counts().sort_values(ascending=True).plot(kind = 'barh')
+plt.xlabel("Property Type")
+plt.ylabel("Frequency")
+plt.title("Count by Property Type");
+```
 #### Plot houses location
 ```
 fig = px.scatter_mapbox(
