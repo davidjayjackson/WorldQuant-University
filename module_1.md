@@ -1,6 +1,11 @@
 ## Analysis of Mexico Housing Prices
 #### Commands Used:
 ```
+#### Library that need to be loaded
+import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.express as px
+
 * df.from_csv() (create a data frame from csv file
 * df.to_csv()   ( write data data to csv file)
 * df.concat()   combine dart frame into single data frames (axis = 0 is for columns
@@ -14,10 +19,44 @@ df.replace()
 * df2.drop(columns=['price_mxn'],inplace = True)
 * df3[["lat","lon"]] = df3["lat-lon"].str.split(",",expand = True)
 
-#### Library that need to be loaded
-import pandas as pd
-import matplotlib.pyplot as plt
-import plotly.express as px
+####  k1.1.2 Nested List and dictonary
+houses_nested_list = [
+    [115910.26, 128.0, 4.0],
+    [48718.17, 210.0, 3.0],
+    [28977.56, 58.0, 2.0],
+    [36932.27, 79.0, 3.0],
+    [83903.51, 111.0, 3.0],
+]
+
+for house in houses_nested_list:
+    price_m2 = house[0]/house[1]
+    house.append(price_m2)
+houses_nested_list
+
+#### 1.1.5 1.1.6: To calculate the mean price for houses_rowwise 
+
+house_prices = []
+for house in houses_rowwise:
+    house_prices.append(house["price_aprox_usd"])
+
+
+mean_house_price = sum(house_prices) / len(house_prices)
+mean_house_price
+
+for house in houses_rowwise:
+    house["price_per_m2"]= house["price_aprox_usd"] / house["surface_covered_in_m2"]
+    
+#### 1.1.7: Calculate the mean house price in houses_columnwise
+price = houses_columnwise["price_aprox_usd"]
+area = houses_columnwise["surface_covered_in_m2"]
+
+price_per_2m = []
+for p,a in zip(price,area):
+    price_2m = p/a
+    price_per_2m.append(price_2m)
+    
+houses_columnwise["price_2m"] = price_per_2m
+houses_columnwise
 
 ---------------------------------------------------------------------------
 ### Answers: https://chat.openai.com/
