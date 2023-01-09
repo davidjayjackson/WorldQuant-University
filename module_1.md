@@ -177,7 +177,21 @@ plt.xlabel("Area [sq meters]")
 plt.ylabel("Price per meter sq (USD]")
 plt.title("Morelos: Price vs. Area")
 
-#### 1.5.0 
+#### 1.5.0 Assignment Task 1.5.19
+Create a dictionary south_states_corr, where the keys are the names of the three states in the "South" region of Brazil, and their associated values are the correlation coefficient between "area_m2" and "price_usd" in that state.
+
+* Select only rows where "region" is "South"
+df = df[df["region"] == "South"]
+
+* Group data by "state" and calculate the correlation coefficient between "area_m2" and "price_usd" for each state
+south_states_corr = df.groupby("state")[["area_m2", "price_usd"]].corr().iloc[0::2, -1]
+
+* Convert Series to dictionary
+south_states_corr = south_states_corr.to_dict()
+
+* Print dictionary
+print(south_states_corr)
+
 
 
 ```
