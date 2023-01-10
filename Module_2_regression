@@ -26,6 +26,10 @@ def wrangle(filepath):
     ## PUll USD < 400_000
     mask_price = df['price_aprox_usd' ] < 400_000
     df = df[mask_ba & mask_apt & mask_price]
+    ## Thin out the herd
+    low, high = df['surface_covered_in_m2'].quantile([0.1,0.9])
+    mask_area = df['surface_covered_in_m2'].between(low,high)
+    df = df[mask_area]
     return df
     
 #### !ask 2.1.2: Use your wrangle function to create a DataFrame df from the CSV file
@@ -46,6 +50,11 @@ that cost less than $400,000 USD.
 
 mask_ba = df['place_with_parent_names'].str.contains("Capital Federal")
 df[mask_ba].head()
+
+#### Task 2.1.6: Add to your wrangle function so that it removes observations that are 
+outliers in the "surface_covered_in_m2" column. Specifically, 
+all observations should fall between the 0.1 and 0.9 quantiles for "surface_covered_in_m2".
+
 
 
 ```
