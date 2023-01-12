@@ -58,6 +58,32 @@ all observations should fall between the 0.1 and 0.9 quantiles for "surface_cove
 #### Task 2.1.7: Create a scatter plot that shows price ("price_aprox_usd") vs area ("surface_covered_in_m2") in our dataset. 
 Make sure to label your x-axis "Area [sq meters]" and your y-axis "Price [USD]".
 
+plt.scatter( x='surface_covered_in_m2',y = 'price_aprox_usd', data =df)
+plt.xlabel("Area [sq meters]")
+plt.ylabel("Price [USD]")
+plt.title("Buenos Aires Price  vs Area")
+plt.show()
+ ##
+ import seaborn as sea
+sea.regplot( x='surface_covered_in_m2',y = 'price_usd_per_m2', data =df)
+
+
+#### Task 2.1.8: (Split) Create the feature matrix named X_train, which you'll use to train your model. 
+It should contain one feature only: ["surface_covered_in_m2"]. 
+Remember that your feature matrix should always be two-dimensional.
+
+#### Task 2.1.9: Create the target vector named y_train, which you'll use to train your model.
+Your target should be "price_aprox_usd". 
+Remember that, in most cases, your target vector should be one-dimensional.
+
+target = "price_aprox_usd"
+y_train = df[target]
+y_train.shape
+
+####  2.1.9 Build Model: Baseline
+Calculate the mean of your target vector y_train and assign it to the variable y_mean.
+
+
 
 
 
