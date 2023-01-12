@@ -55,6 +55,10 @@ df[mask_ba].head()
 outliers in the "surface_covered_in_m2" column. Specifically, 
 all observations should fall between the 0.1 and 0.9 quantiles for "surface_covered_in_m2".
 
+#### Task 2.1.7: Create a scatter plot that shows price ("price_aprox_usd") vs area ("surface_covered_in_m2") in our dataset. 
+Make sure to label your x-axis "Area [sq meters]" and your y-axis "Price [USD]".
+
+
 
 
 ```
