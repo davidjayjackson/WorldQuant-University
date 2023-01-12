@@ -1,0 +1,21 @@
+#### Python Pandas how can I use standard  deviation to determine what values are outlier? 
+
+You can use the std() method in Pandas to calculate the standard deviation of a column in a DataFrame. 
+To determine which values are outliers, you can then compare each value in the column 
+to the mean (calculated with the mean() method) plus or minus a certain number of standard deviations (e.g. 3).
+Any value that falls outside of this range can be considered an outlier.
+
+* Here is an example of how you can do this:
+
+```
+import pandas as pd
+
+df = pd.read_csv('your_data.csv')
+
+col_name = 'your_column_name'
+mean = df[col_name].mean()
+std = df[col_name].std()
+outliers = df[(df[col_name] < mean - 3*std) | (df[col_name] > mean + 3*std)]
+print(outliers)
+
+```
