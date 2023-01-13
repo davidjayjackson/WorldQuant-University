@@ -83,6 +83,48 @@ y_train.shape
 ####  2.1.9 Build Model: Baseline
 Calculate the mean of your target vector y_train and assign it to the variable y_mean.
 
+target = "price_aprox_usd"
+y_train = df[target]
+y_train.shape
+
+#### Task 2.1.10: BASELINE: Calculate the mean of your target vector y_train and assign it to the variable y_mean
+
+y_mean = y_train.mean()
+y_mean
+
+#### Task 2.1.11: Create a list named y_pred_baseline that contains the value of 
+y_mean repeated so that it's the same length at y.
+
+y_pred_baseline = [y_mean] * len(y_train)
+
+#### Task 2.1.12: Add a line to the plot below that shows the relationship between the observations X_train
+and our dumb model's predictions y_pred_baseline.
+
+plt.plot(X_train["surface_covered_in_m2"],y_pred_baseline,color = "orange",label ="Baseline Model")
+plt.scatter(X_train, y_train)
+plt.xlabel("Area [sq meters]")
+plt.ylabel("Price [USD]")
+plt.title("Buenos Aires: Price vs. Area")
+plt.legend();
+
+plt.plot(X_train.values,y_pred_baseline,color = "orange",label ="Baseline Model")
+plt.scatter(X_train, y_train)
+plt.xlabel("Area [sq meters]")
+plt.ylabel("Price [USD]")
+plt.title("Buenos Aires: Price vs. Area")
+plt.legend();
+
+#### Task 2.1.13: Calculate the baseline mean absolute error
+
+mae_baseline = mean_absolute_error(y_train,y_pred_baseline)
+
+print("Mean apt price", round(y_mean, 2))
+print("Baseline MAE:", round(mae_baseline, 2))
+
+### Iterate
+
+
+
 
 
 
