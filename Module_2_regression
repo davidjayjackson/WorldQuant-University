@@ -123,10 +123,28 @@ print("Baseline MAE:", round(mae_baseline, 2))
 
 ### Iterate
 
+#### Task 2.1.14: Instantiate a LinearRegression model named model.
 
+model = LinearRegression
 
+#### Task 2.1.15: Fit your model to the data, X_train and y_train.
+### Evaluate
+#### Task 2.1.16: Using your model's predict method, create a list of predictions for the observations 
+in your feature matrix X_train. Name this array y_pred_training.
 
+y_pred_training = model.predict(X_train)
+y_pred_training[:5]
 
+#### Task 2.1.17: Calculate your training mean absolute error
+
+mae_training = mean_absolute_error(y_train,y_pred_training)
+print("Training MAE:", round(mae_training, 2))
+
+#### Task 2.1.18: Run the code below to import your test data buenos-aires-test-features.csv
+
+X_test = pd.read_csv("data/buenos-aires-test-features.csv")[features]
+y_pred_test = pd.Series(model.predict(X_test))
+y_pred_test.head()
 
 
 ```
