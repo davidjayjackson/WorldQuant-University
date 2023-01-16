@@ -146,5 +146,32 @@ X_test = pd.read_csv("data/buenos-aires-test-features.csv")[features]
 y_pred_test = pd.Series(model.predict(X_test))
 y_pred_test.head()
 
+#### Task 2.1.19: Extract the intercept from your model, and assign it to the variable intercept.
+intercept = model.intercept_
+print("Model Intercept:", intercept)
+assert any([isinstance(intercept, int), isinstance(intercept, float)]
+
+#### Task 2.1.20: Extract the coefficient associated "surface_covered_in_m2" in your model, 
+and assign it to the variable coefficient.
+
+coefficient = round(model.coef_[0],2)
+print('Model coefficient for "surface_covered_in_m2":', coefficient)
+assert any([isinstance(coefficient, int), isinstance(coefficient, float)])
+
+#### Task 2.1.21: Complete the code below and run the cell to print the equation that your model has 
+determined for predicting apartment price based on size.
+
+print("apt_price  = {intercept} + {coefficient} * surface_covered")
+
+#### Task 2.1.22: Add a line to the plot below that shows the relationship between 
+the observations in X_train and your model's predictions y_pred_training. 
+Be sure that the line color is red, and that it has the label "Linear Model".
+
+plt.plot(X_train, model.predict(X_train),color ="r",label="Linear Model")
+plt.scatter(X_train, y_train)
+plt.xlabel("surface covered [sq meters]")
+plt.ylabel("price [usd]")
+plt.legend();
+
 
 ```
