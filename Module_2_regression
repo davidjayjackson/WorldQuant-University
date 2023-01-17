@@ -167,7 +167,7 @@ print("apt_price  = {intercept} + {coefficient} * surface_covered")
 the observations in X_train and your model's predictions y_pred_training. 
 Be sure that the line color is red, and that it has the label "Linear Model".
 
-plt.plot(X_train, model.predict(X_train),color ="r",label="Linear Model")
+plt.plot(X_train.values, model.predict(X_train),color ="r",label="Linear Model")
 plt.scatter(X_train, y_train)
 plt.xlabel("surface covered [sq meters]")
 plt.ylabel("price [usd]")
