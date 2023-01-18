@@ -133,6 +133,51 @@ X_test = pd.read_csv("data/buenos-aires-test-features.csv")[features]
 y_pred_test = pd.Series(model.predict(X_test))
 y_pred_test.head()
 
+#### Task 2.2.20: Extract the intercept and coefficients for your model.
 
+coefficients =  model.named_steps["linearregression"].coef_
+intercept = model.named_steps["linearregression"].intercept_
 
+#### Task 2.2.21: Complete the code below and run the cell to print the equation that your model has determined for
+predicting apartment price based on latitude and longitude.
+
+print(
+    
+    f"price = {intercept} + ({coefficients[0]} * longitude) + ({coefficients[1]} * latitude)"
+)
+
+#### Task 2.2.22: Complete the code below to create a 3D scatter plot, with "lon" on the x-axis, 
+"lat" on the y-axis, and "price_aprox_usd" on the z-axis.
+
+# Create 3D scatter plot
+fig = px.scatter_3d(
+    df,
+    x="lon",
+    y="lat",
+    z="price_aprox_usd",
+    labels={"lon": "longitude", "lat": "latitude", "price_aprox_usd": "price"},
+    width=600,
+    height=500,
+)
+
+# Create x and y coordinates for model representation
+x_plane = np.linspace(df["lon"].min(), df["lon"].max(), 10)
+y_plane = np.linspace(df["lat"].min(), df["lat"].max(), 10)
+xx, yy = np.meshgrid(x_plane, y_plane)
+
+# Use model to predict z coordinates
+z_plane = model.predict(pd.DataFrame({"lon": x_plane, "lat": y_plane}))
+zz = np.tile(z_plane, (10, 1))
+
+# Add plane to figure
+fig.add_trace(go.Surface(x=xx, y=yy, z=zz))
+
+# Refine formatting
+fig.update_traces(
+    marker={"size": 4, "line": {"width": 2, "color": "DarkSlateGrey"}},
+    selector={"mode": "markers"},
+)
+
+# Display figure
+fig.show()
 ```
