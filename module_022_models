@@ -62,5 +62,77 @@ features = ["lon", "lat"]
 X_train = df[features]
 X_train.shape
 
+#### Task 2.2.8: Create the target vector named y_train
+target = "price_aprox_usd"
+y_train = df[target]
+y_train.shape
+
+### Build Model
+#### Baseline
+
+#### Task 2.2.(09) 10: Create a list named y_pred_baseline that contains the value of y_mean repeated 
+so that it's the same length at y_train.
+
+y_mean = y_train.mean()
+y_pred_baseline = [y_mean] * len(y_train)
+
+#### Task 2.2.11: Calculate the baseline mean absolute error for your predictions in y_pred_baseline 
+as compared to the true targets in y_train.
+
+mae_baseline = mean_absolute_error(y_train,y_pred_baseline)
+
+print("Mean apt price", round(y_mean, 2))
+print("Baseline MAE:", round(mae_baseline, 2))
+
+### Iterate
+Because of the math it uses, a linear regression model 
+can't handle observations where there are missing values
+
+#### Task 2.2.12: Instantiate a SimpleImputer named imputer.
+
+imputer = SimpleImputer()
+* Check your work
+assert isinstance(imputer, SimpleImputer)
+
+#### Task 2.2.13: Fit your transformer imputer to the feature matrix X.
+imputer.fit(X_train)
+check_is_fitted(imputer)
+
+#### Task 2.2.14: Use your imputer to transform the feature matrix X_train. 
+Assign the transformed data to the variable XT_train.
+
+XT_train = imputer.transform(X_train)
+pd.DataFrame(XT_train, columns=X_train.columns).info()
+
+assert XT_train.shape == (2658, 2), f"`XT_train` is the wrong shape: {XT_train.shape}"
+
+#### Task 2.2.15: Create a pipeline named model that contains a 
+SimpleImputer transformer followed by a LinearRegression predictor.
+model = make_pipeline(
+    SimpleImputer(),
+    LinearRegression()
+)
+
+#### Task 2.2.16: Fit your model to the data, X_train and y_train
+model.fit(X_train,y_train)
+
+### Evaluate
+#### Task 2.2.17: Using your model's predict method, 
+create a list of predictions for the observations in your feature matrix X_train. Name this list y_pred_training.
+
+y_pred_training = model.predict(X_train)
+assert y_pred_training.shape == (2658,)
+
+#### Task 2.2.18: Calculate the training mean absolute error for your predictions in 
+y_pred_training as compared to the true targets in y_train.
+
+#### Task 2.2.19: Run the code below to import your test data buenos-aires-test-features.csv into a DataFrame and generate a Series of predictions using your model. 
+Then run the following cell to submit your predictions to the grader.
+
+X_test = pd.read_csv("data/buenos-aires-test-features.csv")[features]
+y_pred_test = pd.Series(model.predict(X_test))
+y_pred_test.head()
+
+
 
 ```
