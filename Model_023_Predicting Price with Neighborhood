@@ -172,4 +172,10 @@ coefficients = model.named_steps["ridge"].coef_
 print("coefficients len:", len(coefficients))
 print(coefficients[:5])  # First five coefficients
 
+#### Task 2.3.16: Create a horizontal bar chart that shows the top 15 coefficients for your model, 
+based on their absolute value.
+feat_imp.sort_values(key=abs).tail(15).plot(kind="barh")
+plt.xlabel("Importance [USD]")
+plt.ylabel("Feature")
+plt.title("Feature Importance for Apartment Price")
 ```
