@@ -47,6 +47,9 @@ def wrangle(filepath):
     # Get place name
     df["neighborhood"] = df["place_with_parent_names"].str.split("|", expand=True)[3]
     df.drop(columns="place_with_parent_names", inplace=True)
+    ## Categories with hi and low items
+    df.drop(columns=["floor","expenses"],inplace = True)
+    df.drop(columns =["operation","property_type","currency","properati_url"],inplace = True)
 
     
     return df
@@ -87,6 +90,14 @@ Task 2.4.4: Modify your wrangle function to drop any columns that are more than 
 df.ianull().sum()/len(df)
 
 Add to function:
-df.drop(columns=["floor","expenses"])
+df.drop(columns=["floor","expenses"],inplace = True)
 
+The next thing we need to look out for are categorical columns with low or high cardinality. 
+#### Task 2.4.5: Calculate the number of unique values for each non-numeric feature in df.
+
+df.select_dtypes("object").nunique()
+
+Add to Wrangle function:
+df.select_dtypes("object").nunique()
+df.drop(columns =["operation","property_type","currency","properati_url"])
 ```
