@@ -18,4 +18,6 @@ std = df[col_name].std()
 outliers = df[(df[col_name] < mean - 3*std) | (df[col_name] > mean + 3*std)]
 print(outliers)
 
+#### Lession 02.4.4 Remove columns with NA > 50%
+
 ```
