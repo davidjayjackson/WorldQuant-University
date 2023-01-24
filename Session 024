@@ -99,5 +99,22 @@ df.select_dtypes("object").nunique()
 
 Add to Wrangle function:
 df.select_dtypes("object").nunique()
-df.drop(columns =["operation","property_type","currency","properati_url"])
-```
+df.drop(columns =["operation","property_type","currency","properati_url"], inplace = True)
+
+### Task 2.4.7: Modify your wrangle function to drop any features that would constitute leakage.
+
+Task 2.4.8: Plot a correlation heatmap of the remaining numerical features in df. 
+Since "price_aprox_usd" will be your target, you don't need to include it in your heatmap.
+
+corr =df.select_dtypes("number").drop(columns ="price_aprox_usd").corr()
+sns.heatmap(corr)
+
+
+#### Task 2.4.9: Modify your wrangle function to remove columns so that there are no strongly correlated features in your feature matrix.
+
+df.drop(columns =["surface_total_in_m2","rooms"],inplace = True)
+corr =df.select_dtypes("number").corr()
+sns.heatmap(corr)
+
+#### Task 2.4.10: Create your feature matrix X_train and target vector y_train. Your target is "price_aprox_usd". 
+
