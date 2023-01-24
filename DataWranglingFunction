@@ -22,7 +22,15 @@ def wrangle(filepath):
     df["neighborhood"] = df["place_with_parent_names"].str.split("|",expand = True)[3]
     df.drop(columns ="place_with_parent_names",inplace = True)
     
-
+    ## 2.4.7 Drop leaky columns
+     df.drop(columns = [
+            'price',
+            'price_aprox_local_currency', 
+            'price_per_m2',
+            'price_usd_per_m2'
+           ],inplace = True)
+      #### 2.4.8/9
+      df.drop(columns =["surface_total_in_m2","rooms"],inplace = True)
     
 
     return df
