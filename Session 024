@@ -118,3 +118,8 @@ sns.heatmap(corr)
 
 #### Task 2.4.10: Create your feature matrix X_train and target vector y_train. Your target is "price_aprox_usd". 
 
+From Forum:
+target = "price_aprox_usd"
+features = ["surface_covered_in_m2", "lat", "lon", "neighborhood"]
+X_train=df[features]
+y_train =df[train]
