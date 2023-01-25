@@ -122,4 +122,25 @@ From Forum:
 target = "price_aprox_usd"
 features = ["surface_covered_in_m2", "lat", "lon", "neighborhood"]
 X_train=df[features]
-y_train =df[train]
+y_train =df[target]
+
+#### Task 2.4.11: Calculate the baseline mean absolute error for your model.
+
+y_mean = y_train.mean()
+y_pred_baseline = [y_mean] * len(y_train)
+print("Mean apt price:",y_mean)
+print("Baseline MAE:", mean_absolute_error(y_train,y_pred_baseline))
+
+#### Task 2.4.12: Create a pipeline named model that contains a OneHotEncoder, SimpleImputer, and Ridge predictor.
+model.fit(X_train,y_train)
+ohe = OneHotEncoder(use_cat_names = True)
+ohe.fit(X_train)
+XT_train = ohe.transform(X_train)
+print(XT_train.shape)
+XT_train.head()
+
+model = make_pipeline(
+    OneHotEncoder(use_cat_names=True),
+    LinearRegression()
+)
+model.fit(X_train,y_train)
