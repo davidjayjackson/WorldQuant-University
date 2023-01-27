@@ -110,6 +110,31 @@ print("features len:", len(feature_names))
 print(feature_names[:5])  # First five feature names
 
 # Task 2.3.13
+feat_imp = pd.Series(coefficients,index=feature_names)
+feat_imp.head()
+
+print(f"price = {intercept.round(2)}")
+for f, c in feat_imp.items():
+    print(f"+ ({round(c, 2)} * {f})")
+    
+# Task 2.3.15
+model = make_pipeline(
+    OneHotEncoder(use_cat_names=True),
+    Ridge()
+)
+model.fit(X_train,y_train)
+
+intercept = model.named_steps["ridge"].intercept_
+coefficients = model.named_steps["ridge"].coef_
+print("coefficients len:", len(coefficients))
+print(coefficients[:5])  # First five coefficients
+
+# Task 2.3.16
+based on their absolute value.
+feat_imp.sort_values(key=abs).tail(15).plot(kind="barh")
+plt.xlabel("Importance [USD]")
+plt.ylabel("Feature")
+plt.title("Feature Importance for Apartment Price")
 
   
 
